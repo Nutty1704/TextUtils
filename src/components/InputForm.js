@@ -62,6 +62,10 @@ export default function InputForm(props) {
 	setSummary(getTextSummary(''));
   };
 
+  const handleCopyClick = () => {
+	navigator.clipboard.writeText(text);
+  }
+
   const handleOnChange = (event) => {
 	setText(event.target.value);
 	setSummary(getTextSummary(event.target.value));
@@ -77,6 +81,7 @@ export default function InputForm(props) {
 		  <button className="btn btn-primary mx-2" onClick={handleUpClick}>Convert to Uppercase</button>
 		  <button className="btn btn-primary mx-2" onClick={handleLowClick}>Convert to Lowercase</button>
 		  <button className="btn btn-primary mx-2" onClick={handleInvertClick}>Invert Case</button>
+		  <button className="btn btn-primary mx-2" onClick={handleCopyClick}>Copy to Clipboard</button>
 		  <button className="btn btn-outline-danger mx-2" onClick={handleClearClick}>Clear Text</button>
 	  </div>
 	  <div className="container my-3">
