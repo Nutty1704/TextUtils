@@ -45,25 +45,30 @@ export default function InputForm(props) {
   const handleUpClick = () => {
 	setText(text.toUpperCase());
 	setSummary(getTextSummary(text));
+	props.showAlert('Text converted to uppercase', 'success');
   };
 
   const handleLowClick = () => {
 	setText(text.toLowerCase());
 	setSummary(getTextSummary(text));
+	props.showAlert('Text converted to lowercase', 'success');
   };
 
   const handleInvertClick = () => {
 	setText(invertCase(text));
 	setSummary(getTextSummary(text));
+	props.showAlert('Text case inverted', 'success');
   }
 
   const handleClearClick = () => {
 	setText('');
 	setSummary(getTextSummary(''));
+	props.showAlert('Text cleared', 'success');
   };
 
   const handleCopyClick = () => {
 	navigator.clipboard.writeText(text);
+	props.showAlert('Text copied to clipboard', 'success');
   }
 
   const handleOnChange = (event) => {
@@ -96,7 +101,8 @@ export default function InputForm(props) {
 }
 
 InputForm.propTypes = {
-	heading: PropTypes.string.isRequired
+	heading: PropTypes.string.isRequired,
+	showAlert: PropTypes.func.isRequired
 }
 
 InputForm.defaultProps = {
