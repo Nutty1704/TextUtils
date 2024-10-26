@@ -89,7 +89,7 @@ export default function InputForm(props) {
 		<p>{summary.wordCount} words, {summary.characterCount} characters</p>
 		<p>Estimated Read Time: {summary.timeToRead}</p>
 		<h3>Preview</h3>
-		<p>{text}</p>
+		<p>{text.length === 0 ? 'Enter something in textbox above to preview here' : text}</p>
 	  </div>
 	</>
   );
