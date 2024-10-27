@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 
 
 const lightCSS = {
@@ -8,23 +9,20 @@ const lightCSS = {
 
 const darkCSS = {
     color: 'white',
-    backgroundColor: '#101010',
+    backgroundColor: '#282c34',
 };
 
-export default function About() {
+const getStyle = (mode) => {
+    return mode === 'light' ? lightCSS : darkCSS;
+}
 
-    const [myStyle, setMyStyle] = useState(lightCSS);
-    const [btnText, setBtnText] = useState('Enable Dark Mode');
+export default function About(props) {
 
-    const toggleStyle = () => {
-        if (myStyle.color === 'white') {
-            setMyStyle(lightCSS);
-            setBtnText('Enable Dark Mode');
-        } else {
-            setMyStyle(darkCSS);
-            setBtnText('Enable Light Mode');
-        }
-    }
+    const [myStyle, setMyStyle] = useState(getStyle(props.mode));
+
+    useEffect(() => {
+        setMyStyle(getStyle(props.mode));
+    }, [props.mode]);
 
     return (
     <div className="container" style={myStyle}>
@@ -67,9 +65,11 @@ export default function About() {
                 </div>
             </div>
         </div>
-        <div className="container my-3">
-            <button type="button" className="btn btn-primary my-3" onClick={toggleStyle}>{btnText}</button>
-        </div>
     </div>
     )
+}
+
+
+About.propTypes = {
+    mode: PropTypes.string.isRequired
 }

@@ -76,12 +76,30 @@ export default function InputForm(props) {
 	setSummary(getTextSummary(event.target.value));
   };
 
+
+  const getTextAreaStyle = (mode) => {
+	return {
+		backgroundColor: mode === 'light' ? 'white' : 'rgb(90,90,90)',
+		color: mode === 'light' ? 'black' : 'white',
+		'::placeholder': {
+			color: mode === 'light' ? 'black' : 'white'
+		},
+	}
+  };
+
+  const getPlaceholderStyle = (mode) => {
+	return mode === 'light' ? 'textarea-light' : 'textarea-dark';
+  }
+
   return (
 	<>
 	  <div className="container">
 		  <h1>{props.heading}</h1>
 		  <div className="mb-3">
-			<textarea className="form-control" value={text} onChange={handleOnChange} id="myBox" rows="8" placeholder='Enter text here'></textarea>
+			<textarea className={`form-control ${getPlaceholderStyle(props.mode)}`}
+					value={text} onChange={handleOnChange}
+					id="myBox" rows="8"
+					placeholder='Enter text here' style={getTextAreaStyle(props.mode)}></textarea>
 		  </div>
 		  <button className="btn btn-primary mx-2" onClick={handleUpClick}>Convert to Uppercase</button>
 		  <button className="btn btn-primary mx-2" onClick={handleLowClick}>Convert to Lowercase</button>
@@ -94,7 +112,7 @@ export default function InputForm(props) {
 		<p>{summary.wordCount} words, {summary.characterCount} characters</p>
 		<p>Estimated Read Time: {summary.timeToRead}</p>
 		<h3>Preview</h3>
-		<p>{text.length === 0 ? 'Enter something in textbox above to preview here' : text}</p>
+		<p>{text.length === 0 ? 'Nothing to preview' : text}</p>
 	  </div>
 	</>
   );
@@ -102,7 +120,8 @@ export default function InputForm(props) {
 
 InputForm.propTypes = {
 	heading: PropTypes.string.isRequired,
-	showAlert: PropTypes.func.isRequired
+	showAlert: PropTypes.func.isRequired,
+	mode: PropTypes.string.isRequired
 }
 
 InputForm.defaultProps = {

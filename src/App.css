@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.textarea-light::placeholder {
+  color: rgb(150, 150, 150); /* Light mode placeholder color */
+}
+
+.textarea-dark::placeholder {
+  color: rgb(200, 200, 200); /* Dark mode placeholder color */
+}
